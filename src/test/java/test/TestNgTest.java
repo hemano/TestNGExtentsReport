@@ -1,5 +1,6 @@
 package test;
 
+import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
@@ -20,6 +21,7 @@ public class TestNgTest {
     public void simpleTest() {
         Reporter.log("Simple test");
         Reporter.log("Another log");
+        Assert.assertTrue(false);
     }
 
     @Test(groups = {"group2"})

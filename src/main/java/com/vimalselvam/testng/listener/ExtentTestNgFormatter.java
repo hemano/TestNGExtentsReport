@@ -89,7 +89,7 @@ public class ExtentTestNgFormatter implements ISuiteListener, ITestListener, IIn
     }
 
     public void onStart(ISuite iSuite) {
-        ExtentTest suite = reporter.createTest(iSuite.getName());
+//        ExtentTest suite = reporter.createTest(iSuite.getName());
 
         String configFile = iSuite.getParameter("report.config");
 
@@ -103,7 +103,7 @@ public class ExtentTestNgFormatter implements ISuiteListener, ITestListener, IIn
         }
 
         iSuite.setAttribute(REPORTER_ATTR, reporter);
-        iSuite.setAttribute(SUITE_ATTR, suite);
+//        iSuite.setAttribute(SUITE_ATTR, suite);
     }
 
     private void generateSystemInfo(String systemInfoCustomImplName) {
@@ -146,28 +146,32 @@ public class ExtentTestNgFormatter implements ISuiteListener, ITestListener, IIn
     }
 
     public void onStart(ITestContext iTestContext) {
-        ISuite iSuite = iTestContext.getSuite();
-        ExtentTest suite = (ExtentTest) iSuite.getAttribute(SUITE_ATTR);
-        ExtentTest testContext = suite.createNode(iTestContext.getName());
-        iTestContext.setAttribute("testContext", testContext);
+//        ExtentTest suite = reporter.createTest(iSuite.getName());
+//
+//        ISuite iSuite = iTestContext.getSuite();
+//        ExtentTest suite = (ExtentTest) iSuite.getAttribute(SUITE_ATTR);
+//        ExtentTest testContext = suite.createNode(iTestContext.getName());
+//        iTestContext.setAttribute("testContext", testContext);
     }
 
     public void onFinish(ITestContext iTestContext) {
-        ExtentTest testContext = (ExtentTest) iTestContext.getAttribute("testContext");
-        if (iTestContext.getFailedTests().size() > 0) {
-            testContext.fail("Failed");
-        } else if (iTestContext.getSkippedTests().size() > 0) {
-            testContext.skip("Skipped");
-        } else {
-            testContext.pass("Passed");
-        }
+//        ExtentTest testContext = (ExtentTest) iTestContext.getAttribute("testContext");
+//        if (iTestContext.getFailedTests().size() > 0) {
+//            testContext.fail("Failed");
+//        } else if (iTestContext.getSkippedTests().size() > 0) {
+//            testContext.skip("Skipped");
+//        } else {
+//            testContext.pass("Passed");
+//        }
     }
 
     public void beforeInvocation(IInvokedMethod iInvokedMethod, ITestResult iTestResult) {
         if (iInvokedMethod.isTestMethod()) {
-            ITestContext iTestContext = iTestResult.getTestContext();
-            ExtentTest testContext = (ExtentTest) iTestContext.getAttribute("testContext");
-            ExtentTest test = testContext.createNode(iTestResult.getName());
+            ExtentTest test = reporter.createTest(iTestResult.getName());
+
+//            ITestContext iTestContext = iTestResult.getTestContext();
+//            ExtentTest testContext = (ExtentTest) iTestContext.getAttribute("testContext");
+//            ExtentTest test = testContext.createNode(iTestResult.getName());
             iTestResult.setAttribute("test", test);
         }
     }
